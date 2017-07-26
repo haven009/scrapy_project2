@@ -22,6 +22,7 @@ class TianyanchaItem(scrapy.Item):
     operate_state = scrapy.Field()  # 经营状况
     register_num = scrapy.Field()  # 工商注册号
     credit_code = scrapy.Field()  # 统一信用代码
+    taxpayer_iden_num = scrapy.Field()  # 纳税人识别号
     indu = scrapy.Field()  # 行业
     approve_date = scrapy.Field()  # 核准日期
     org_code = scrapy.Field()  # 组织机构代码
@@ -50,6 +51,7 @@ class TianyanchaItem(scrapy.Item):
         self["operate_state"] = None
         self["register_num"] = None
         self["credit_code"] = None
+        self["taxpayer_iden_num"] = None
         self["indu"] = None
         self["approve_date"] = None
         self["org_code"] = None
