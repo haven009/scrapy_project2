@@ -26,7 +26,6 @@ from selenium.webdriver.support.select import Select
 from selenium.webdriver.support.wait import WebDriverWait
 from lib2to3.pgen2.tokenize import Ignore
 
-
 reload(sys)
 sys.setdefaultencoding('utf-8')
 from scrapy.selector import Selector
@@ -134,7 +133,7 @@ class TianYanChaSpider(scrapy.Spider):
         :param response:
         :return:
         """
-        print "解析网页中。。。。。。。。。。。。。。。"
+        print "开始解析网页 ... ... ... ..."
         print response.url
         self.driver.get(response.url)
         self.set_sleep_time()
@@ -153,35 +152,35 @@ class TianYanChaSpider(scrapy.Spider):
         self.selector = Selector(text=self.driver.page_source)
         # print self.driver.page_source
         tianyanchaItem['comp_name'] = regularPatternUtil.substituteStrFunc1(self.selector.css(
-            "div.companyTitleBox55 div.company_header_width span.vertival-middle::text").extract_first())
+            "div.companyTitleBox55 div.company_header_width span.vertival-middle::text").extract_first())  # 提取企业名称
         companyTitle = self.selector.css(
             "div.companyTitleBox55 div.company_header_width div.new-c3 div.in-block span::text").extract()
-        tianyanchaItem['phone_num'] = regularPatternUtil.substituteStrFunc1(old_str=companyTitle[1])
-        tianyanchaItem['comp_url'] = regularPatternUtil.substituteStrFunc1(old_str=companyTitle[5])
-        tianyanchaItem['mail'] = regularPatternUtil.substituteStrFunc1(old_str=companyTitle[3])
-        tianyanchaItem['address'] = regularPatternUtil.substituteStrFunc1(old_str=companyTitle[7])
+        tianyanchaItem['phone_num'] = regularPatternUtil.substituteStrFunc1(old_str=companyTitle[1])  # 提取电话
+        tianyanchaItem['comp_url'] = regularPatternUtil.substituteStrFunc1(old_str=companyTitle[5])  # 提取网址
+        tianyanchaItem['mail'] = regularPatternUtil.substituteStrFunc1(old_str=companyTitle[3])  # 邮箱
+        tianyanchaItem['address'] = regularPatternUtil.substituteStrFunc1(old_str=companyTitle[7])  # 地址
         tianyanchaItem['legal_person'] = regularPatternUtil.substituteStrFunc1(old_str=self.selector.css(
-            "div.company-human-box div.human-top div.overflow-width a::text").extract_first())
+            "div.company-human-box div.human-top div.overflow-width a::text").extract_first())  # 提取法人代表
         register_info = self.selector.css("div.baseInfo_model2017 div.pb10 div::text").extract()
-        tianyanchaItem['register_capital'] = regularPatternUtil.substituteStrFunc1(old_str=register_info[0])
-        tianyanchaItem['register_time'] = regularPatternUtil.substituteStrFunc1(old_str=register_info[1])
+        tianyanchaItem['register_capital'] = regularPatternUtil.substituteStrFunc1(old_str=register_info[0])  # 提取注册资金
+        tianyanchaItem['register_time'] = regularPatternUtil.substituteStrFunc1(old_str=register_info[1])  # 提取注册时间
         tianyanchaItem['operate_state'] = regularPatternUtil.substituteStrFunc1(old_str=self.selector.css(
-            "div.baseInfo_model2017 div.pt10 div.baseinfo-module-content-value::text").extract_first())
+            "div.baseInfo_model2017 div.pt10 div.baseinfo-module-content-value::text").extract_first())  # 提取企业状态
         company_info = self.selector.css("div.base2017 div.c8 span::text").extract()
-        tianyanchaItem['register_num'] = regularPatternUtil.substituteStrFunc1(old_str=company_info[0])
-        tianyanchaItem['org_code'] = regularPatternUtil.substituteStrFunc1(old_str=company_info[1])
-        tianyanchaItem['credit_code'] = regularPatternUtil.substituteStrFunc1(old_str=company_info[2])
-        tianyanchaItem['comp_type'] = regularPatternUtil.substituteStrFunc1(old_str=company_info[3])
-        tianyanchaItem['taxpayer_iden_num'] = regularPatternUtil.substituteStrFunc1(old_str=company_info[4])
-        tianyanchaItem['indu'] = regularPatternUtil.substituteStrFunc1(old_str=company_info[5])
-        tianyanchaItem['operat_date'] = regularPatternUtil.substituteStrFunc1(old_str=company_info[6])
-        tianyanchaItem['approve_date'] = regularPatternUtil.substituteStrFunc1(old_str=company_info[7])
-        tianyanchaItem['register_department'] = regularPatternUtil.substituteStrFunc1(old_str=company_info[8])
-        tianyanchaItem['register_address'] = regularPatternUtil.substituteStrFunc1(old_str=company_info[9])
+        tianyanchaItem['register_num'] = regularPatternUtil.substituteStrFunc1(old_str=company_info[0])  # 提取工商注册号
+        tianyanchaItem['org_code'] = regularPatternUtil.substituteStrFunc1(old_str=company_info[1])  # 提取组织机构代码
+        tianyanchaItem['credit_code'] = regularPatternUtil.substituteStrFunc1(old_str=company_info[2])  # 提取统一信用代码
+        tianyanchaItem['comp_type'] = regularPatternUtil.substituteStrFunc1(old_str=company_info[3])  # 提取企业类型
+        tianyanchaItem['taxpayer_iden_num'] = regularPatternUtil.substituteStrFunc1(old_str=company_info[4])  # 提取纳税人识别号
+        tianyanchaItem['indu'] = regularPatternUtil.substituteStrFunc1(old_str=company_info[5])  # 提取行业
+        tianyanchaItem['operat_date'] = regularPatternUtil.substituteStrFunc1(old_str=company_info[6])  # 提取经营期限
+        tianyanchaItem['approve_date'] = regularPatternUtil.substituteStrFunc1(old_str=company_info[7])  # 提取核准日期
+        tianyanchaItem['register_department'] = regularPatternUtil.substituteStrFunc1(old_str=company_info[8])  # 提取登机机关
+        tianyanchaItem['register_address'] = regularPatternUtil.substituteStrFunc1(old_str=company_info[9])  # 提取注册地址
         tianyanchaItem['business_scope'] = regularPatternUtil.substituteStrFunc1(old_str=self.selector.css(
-            "div.base2017 div.c8 span.js-full-container::text").extract_first())
-        tianyanchaItem['page_url'] = response.url
+            "div.base2017 div.c8 span.js-full-container::text").extract_first())  # 提取经营范围
+        tianyanchaItem['page_url'] = response.url  #  提取采集页面网址
         tianyanchaItem['page_title'] = regularPatternUtil.substituteStrFunc1(
-            old_str=self.selector.css("title::text").extract_first())
-        tianyanchaItem['curr_time'] = time.strftime('%Y-%m-%d %X', time.localtime(time.time()))
+            old_str=self.selector.css("title::text").extract_first())  # 提取采集页面标题
+        tianyanchaItem['curr_time'] = time.strftime('%Y-%m-%d %X', time.localtime(time.time()))  # 存储采集页面时间
         yield tianyanchaItem

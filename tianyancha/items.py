@@ -19,7 +19,7 @@ class TianyanchaItem(scrapy.Item):
     legal_person = scrapy.Field()  # 法人代表
     register_capital = scrapy.Field()  # 注册资金
     register_time = scrapy.Field()  # 注册时间
-    operate_state = scrapy.Field()  # 经营状况
+    operate_state = scrapy.Field()  # 企业状态
     register_num = scrapy.Field()  # 工商注册号
     credit_code = scrapy.Field()  # 统一信用代码
     taxpayer_iden_num = scrapy.Field()  # 纳税人识别号
