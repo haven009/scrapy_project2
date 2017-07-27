@@ -34,6 +34,7 @@ class TianyanchaItem(scrapy.Item):
     page_url = scrapy.Field()  # 采集页面网址
     page_title = scrapy.Field()  # 采集页面标题
     curr_time = scrapy.Field()  # 采集页面时间
+    tianyancha_uuid = scrapy.Field()  # UUID
 
     def setAll(self):
         """
